@@ -19,7 +19,7 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
     const renderEstrellas = (nota) => {
         const valor = nota || 0;
         return [...Array(5)].map((_, index) => (
-            <span key={index} className={index + 1 <= Math.round(valor) ? "text-yellow-400" : "text-gray-500"}>★</span>
+            <span key={index} className={index + 1 <= Math.round(valor) ? "text-yellow-500" : "text-gray-500"}>★</span>
         ));
     };
 
