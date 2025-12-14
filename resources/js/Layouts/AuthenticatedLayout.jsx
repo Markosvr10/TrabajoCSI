@@ -10,13 +10,11 @@ export default function Authenticated({ user, header, children }) {
     const { listaGeneros } = usePage().props || {};
 
     return (
-        <div className="min-h-screen bg-gray-50">
-
+        <div className="min-h-screen bg-gray-900">
             <nav className="bg-gradient-to-r from-violet-700 via-purple-700 to-indigo-800 shadow-2xl rounded-b-[2rem] border-b-0 relative z-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-20 items-center">
                         <div className="flex items-center gap-8">
-
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
                                     <h1 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-tr from-white to-violet-200 tracking-tighter hover:scale-105 transition-transform duration-300 drop-shadow-sm">
@@ -31,12 +29,8 @@ export default function Authenticated({ user, header, children }) {
                                     Inicio
                                 </NavLink>
 
-                                <NavLink href="/mis-peliculas" active={window.location.pathname === '/mis-peliculas'}>
+                                <NavLink href="/peliculas" active={window.location.pathname === '/peliculas'}>
                                     Películas
-                                </NavLink>
-
-                                <NavLink href="/series" active={window.location.pathname === '/series'}>
-                                    Series
                                 </NavLink>
 
                                 <div className="relative ms-2">

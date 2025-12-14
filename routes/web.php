@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\PeliculaController;
+use App\Http\Controllers\ResenaController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,6 +19,10 @@ Route::get('/', function () {
     ]);
 })->name('welcome');
 
+Route::get('/peliculas', [PeliculaController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('peliculas.index');
+
 Route::get('/pelicula/{id}', [PeliculaController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('pelicula.show');
@@ -25,6 +30,10 @@ Route::get('/pelicula/{id}', [PeliculaController::class, 'show'])
 Route::post('/pelicula/{id}/favorito', [PeliculaController::class, 'toggleFavorito'])
     ->middleware(['auth', 'verified'])
     ->name('favoritos.toggle');
+
+Route::post('/pelicula/{id}/resena', [ResenaController::class, 'store'])
+    ->middleware(['auth', 'verified'])
+    ->name('resenas.store');
 
 Route::get('/principal', [PrincipalController::class, 'index'])
     ->middleware(['auth', 'verified'])

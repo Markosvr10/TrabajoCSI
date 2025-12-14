@@ -2,10 +2,8 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 
 // Recibimos 'auth' y 'peliculasFavoritas'.
-// IMPORTANTE: Ponemos ' = []' para que si falla el backend, no explote la pantalla.
-export default function Principal({ auth, peliculasFavoritas = [] }) {
+export default function Principal({ auth, peliculasFavoritas }) {
 
-    // Función para pintar estrellas según la nota (ej: 3.5)
     const renderEstrellas = (nota) => {
         return [...Array(5)].map((_, index) => {
             const estrellaNumero = index + 1;
@@ -53,10 +51,6 @@ export default function Principal({ auth, peliculasFavoritas = [] }) {
                             <svg className="w-6 h-6 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                             Tus Favoritos
                         </h2>
-
-                        <Link href="/mis-peliculas" className="text-sm font-semibold text-violet-600 hover:text-violet-800 transition">
-                            Ver todo &rarr;
-                        </Link>
                     </div>
 
                     {/*CARRUSEL HORIZONTAL*/}
@@ -106,17 +100,6 @@ export default function Principal({ auth, peliculasFavoritas = [] }) {
                                     </div>
                                 </div>
                             ))}
-
-                            {/* Tarjeta "Ver Más" al final del carrusel */}
-                            <Link
-                                href="/mis-peliculas"
-                                className="snap-center shrink-0 w-[160px] md:w-[200px] flex flex-col items-center justify-center bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 hover:border-violet-400 hover:bg-violet-50 transition cursor-pointer group"
-                            >
-                                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-sm group-hover:scale-110 transition">
-                                    <span className="text-2xl text-violet-500 font-bold">+</span>
-                                </div>
-                                <span className="mt-3 text-sm font-medium text-gray-500 group-hover:text-violet-600">Ver colección</span>
-                            </Link>
 
                         </div>
                     ) : (

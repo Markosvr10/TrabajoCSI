@@ -3,23 +3,35 @@ import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function DetallePelicula({ auth, pelicula, esFavorita }) {
 
-    // Hook para manejar la petición POST
-    const { post, processing } = useForm();
+    // --- 1. LÓGICA PARA FAVORITOS ---
+    const { post: postFavorito, processing: processingFavorito } = useForm();
 
     const toggleFavorito = () => {
-
-        post(route('favoritos.toggle', pelicula.id), {
+        postFavorito(route('favoritos.toggle', pelicula.id), {
             preserveScroll: true,
-            onSuccess: () => {
-                console.log('Favorito actualizado correctamente');
-            },
         });
     };
 
+    // --- 2. LÓGICA PARA RESEÑAS (SÓLO TEXTO) ---
+    // Hemos quitado 'puntuacion' del estado inicial
+    const { data, setData, post: postResena, processing: processingResena, reset, errors } = useForm({
+        titulo: '',
+        contenido: '',
+    });
+
+    const submitResena = (e) => {
+        e.preventDefault();
+        postResena(route('resenas.store', pelicula.id), {
+            preserveScroll: true,
+            onSuccess: () => reset(), // Limpia el formulario al terminar
+        });
+    };
+
+    // Helper para pintar las estrellas de la PELÍCULA (Estática)
     const renderEstrellas = (nota) => {
         const valor = nota || 0;
         return [...Array(5)].map((_, index) => (
-            <span key={index} className={index + 1 <= Math.round(valor) ? "text-yellow-500" : "text-gray-500"}>★</span>
+            <span key={index} className={index + 1 <= Math.round(valor) ? "text-yellow-400" : "text-gray-500"}>★</span>
         ));
     };
 
@@ -27,8 +39,9 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
         <AuthenticatedLayout user={auth.user}>
             <Head title={pelicula.titulo} />
 
+            {/* --- SECCIÓN SUPERIOR: DETALLES --- */}
             <div className="relative bg-gray-900 min-h-[500px] overflow-hidden">
-                <img src={pelicula.imagen_url} className="absolute inset-0 w-full h-full object-cover opacity-20 blur-2xl scale-110" />
+                <img src={pelicula.imagen_url} className="absolute inset-0 w-full h-full object-cover opacity-20 blur-2xl scale-110" alt="" />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-50 via-gray-900/60 to-gray-900/90"></div>
 
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -38,7 +51,6 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
                     </Link>
 
                     <div className="flex flex-col md:flex-row gap-10 items-start">
-
                         {/* PÓSTER */}
                         <div className="w-full md:w-1/3 lg:w-1/4 flex-shrink-0">
                             <div className="rounded-xl overflow-hidden shadow-2xl border border-white/10 relative group bg-black">
@@ -85,50 +97,129 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
                                     Ver Trailer
                                 </button>
 
-                                {/* BOTÓN FAVORITOS*/}
-                                {esFavorita ? (
-                                    <button
-                                        type="button"
-                                        onClick={toggleFavorito}
-                                        disabled={processing}
-                                        className="px-6 py-3 bg-violet-200 hover:bg-violet-200 text-black font-bold rounded-full transition backdrop-blur border border-white/10 flex items-center gap-2"
-                                    >
-                                        <span>-</span> Quitar de Favoritos
-                                    </button>
-                                ) : (
-                                    <button
-                                        type="button"
-                                        onClick={toggleFavorito}
-                                        disabled={processing}
-                                        className="px-6 py-3 bg-white/10 hover:bg-white/20 text-black font-bold rounded-full transition backdrop-blur border border-white/10 flex items-center gap-2"
-                                    >
-                                        <span>+</span> Añadir a Favoritos
-                                    </button>
-                                )}
+                                {/* Botón Favoritos Dinámico */}
+                                <button
+                                    type="button"
+                                    onClick={toggleFavorito}
+                                    disabled={processingFavorito}
+                                    className={`px-8 py-3 font-bold rounded-full transition border flex items-center gap-2 transform hover:-translate-y-0.5 ${esFavorita
+                                        ? 'bg-red-500/90 hover:bg-red-600 text-white border-transparent shadow-lg shadow-red-500/20'
+                                        : 'bg-white/5 hover:bg-white/10 text-white border-white/20 backdrop-blur-sm'
+                                        } ${processingFavorito ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                >
+                                    {esFavorita ? (
+                                        <><span>-</span> Quitar de Favoritos</>
+                                    ) : (
+                                        <><span>+</span> Añadir a Favoritos</>
+                                    )}
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            {/* --- SECCIÓN INFERIOR: RESEÑAS INFORMATIVAS --- */}
             <div className="bg-gray-50 py-16 border-t border-gray-200">
                 <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
                     <h3 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-3">
-                        Reseñas
+                        Comentarios de la comunidad
+                        <span className="bg-violet-100 text-violet-700 text-sm font-bold py-1 px-3 rounded-full">
+                            {pelicula.resenas ? pelicula.resenas.length : 0}
+                        </span>
                     </h3>
 
-                    <div className="bg-white rounded-2xl p-12 border border-gray-200 shadow-sm text-center">
-                        <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4 text-gray-400">
-                            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                        </div>
-                        <h4 className="text-lg font-bold text-gray-900">Aún no hay reseñas</h4>
-                        <p className="text-gray-500 mb-8 max-w-sm mx-auto">Sé el primero en compartir tu opinión sobre esta película con la comunidad.</p>
-                        <button className="px-8 py-2.5 bg-gray-900 text-white font-medium rounded-lg hover:bg-black transition cursor-not-allowed opacity-50 shadow-lg">
-                            Escribir reseña (Próximamente)
-                        </button>
+                    {/* FORMULARIO DE RESEÑA */}
+                    <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm mb-12">
+                        <h4 className="text-lg font-bold text-gray-800 mb-6 border-b border-gray-100 pb-2">Deja tu comentario</h4>
+
+                        <form onSubmit={submitResena} className="space-y-6">
+
+                            {/* Título */}
+                            <div>
+                                <label htmlFor="titulo" className="block text-sm font-medium text-gray-700 mb-1">Título</label>
+                                <input
+                                    id="titulo"
+                                    type="text"
+                                    className="w-full rounded-lg border-gray-300 focus:border-violet-500 focus:ring-violet-500 shadow-sm transition"
+                                    placeholder="Resumen de tu opinión..."
+                                    value={data.titulo}
+                                    onChange={e => setData('titulo', e.target.value)}
+                                />
+                                {errors.titulo && <div className="text-red-500 text-xs mt-1">{errors.titulo}</div>}
+                            </div>
+
+                            {/* Contenido */}
+                            <div>
+                                <label htmlFor="contenido" className="block text-sm font-medium text-gray-700 mb-1">Tu opinión</label>
+                                <textarea
+                                    id="contenido"
+                                    rows="4"
+                                    className="w-full rounded-lg border-gray-300 focus:border-violet-500 focus:ring-violet-500 shadow-sm transition"
+                                    placeholder="Comparte tus pensamientos sobre la película..."
+                                    value={data.contenido}
+                                    onChange={e => setData('contenido', e.target.value)}
+                                ></textarea>
+                                {errors.contenido && <div className="text-red-500 text-xs mt-1">{errors.contenido}</div>}
+                            </div>
+
+                            {/* Botón */}
+                            <div className="flex justify-end">
+                                <button
+                                    type="submit"
+                                    disabled={processingResena}
+                                    className="px-8 py-2.5 bg-violet-600 text-white font-bold rounded-lg hover:bg-violet-700 transition shadow-lg shadow-violet-600/20 disabled:opacity-50 transform hover:-translate-y-0.5"
+                                >
+                                    {processingResena ? 'Publicando...' : 'Publicar Comentario'}
+                                </button>
+                            </div>
+                        </form>
                     </div>
+
+                    {/* LISTA DE COMENTARIOS (SIN ESTRELLAS) */}
+                    <div className="space-y-6">
+                        {pelicula.resenas && pelicula.resenas.length > 0 ? (
+                            pelicula.resenas.map((resena) => (
+                                <div key={resena.id} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition duration-300">
+                                    <div className="flex justify-between items-start mb-4">
+                                        <div className="flex items-center gap-3">
+                                            {/* Avatar (Inicial del nombre) */}
+                                            <div className="w-10 h-10 rounded-full bg-violet-100 flex items-center justify-center text-violet-700 font-bold text-lg border border-violet-200">
+                                                {resena.user?.name.charAt(0).toUpperCase()}
+                                            </div>
+                                            <div>
+                                                <div className="font-bold text-gray-900">{resena.user?.name}</div>
+                                                <div className="text-xs text-gray-500">
+                                                    {new Date(resena.created_at).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {resena.titulo && (
+                                        <h5 className="font-bold text-gray-800 mb-2 text-lg">{resena.titulo}</h5>
+                                    )}
+
+                                    <p className="text-gray-600 leading-relaxed whitespace-pre-line">
+                                        {resena.contenido}
+                                    </p>
+                                </div>
+                            ))
+                        ) : (
+                            <div className="text-center py-16 bg-white rounded-2xl border-2 border-dashed border-gray-300">
+                                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4 text-gray-400">
+                                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                                </div>
+                                <h4 className="text-lg font-medium text-gray-900">Aún no hay comentarios</h4>
+                                <p className="text-gray-500 mt-1">Sé el primero en opinar sobre esta película.</p>
+                            </div>
+                        )}
+                    </div>
+
                 </div>
             </div>
+
         </AuthenticatedLayout>
     );
 }

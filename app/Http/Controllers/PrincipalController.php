@@ -14,7 +14,7 @@ class PrincipalController extends Controller
         $user = Auth::user();
 
 
-        $favoritas = $user->favoritas()->latest()->take(20)->get(); 
+        $favoritas = $user->favoritas()->latest()->get(); 
 
         return Inertia::render('Core/Principal', [
             'peliculasFavoritas' => $favoritas

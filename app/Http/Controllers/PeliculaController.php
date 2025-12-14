@@ -11,8 +11,10 @@ class PeliculaController extends Controller
 {
     public function show($id)
     {
-       
-        $pelicula = Pelicula::with('genero')->findOrFail($id);
+       //hacemos que en $pelicula este tambien las reseñas
+        $pelicula = Pelicula::with(['genero', 'resenas.user' => function($query) {
+            $query->latest(); // Ordenar reseñas por fecha
+        }])->findOrFail($id);
 
         $esFavorita = false;
 
@@ -20,7 +22,7 @@ class PeliculaController extends Controller
             $esFavorita = Auth::user()->favoritas()->where('pelicula_id', $id)->exists();
         }
 
-        // 3. Enviamos los datos a la vista
+        //Enviamos los datos a la vista
         return Inertia::render('Domain/Peliculas/detallesPelicula', [
             'pelicula' => $pelicula,
             'esFavorita' => $esFavorita,
@@ -37,5 +39,26 @@ class PeliculaController extends Controller
         $user->favoritas()->toggle($pelicula->id);
 
         return back();
+    }
+
+    public function index(Request $request){
+
+        $query = Pelicula::with('genero'); // Cargamos el género siempre
+
+        // Si hay búsqueda por texto...
+        if ($request->search) {
+            $query->where('titulo', 'like', '%' . $request->search . '%');
+        }
+
+        // Si hay filtro por género...
+        if ($request->genero) {
+            $query->where('genero_id', $request->genero);
+        }
+
+        // Devolvemos la vista con las películas encontradas
+        return Inertia::render('Domain/Peliculas/listaPeliculas', [
+            'peliculas' => $query->latest()->get(), // Las más nuevas primero
+            'filters' => $request->only(['search', 'genero']), // Para recordar qué buscaste
+        ]);
     }
 }

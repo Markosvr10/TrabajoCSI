@@ -30,4 +30,9 @@ class Pelicula extends Model
     {
         return $this->belongsToMany(User::class, 'pelicula_user')->withTimestamps();
     }
+
+    public function resenas()
+    {
+        return $this->hasMany(Resena::class);
+    }
 }

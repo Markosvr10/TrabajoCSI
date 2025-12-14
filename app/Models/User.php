@@ -51,4 +51,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Pelicula::class, 'pelicula_user')
                     ->withTimestamps();
     }
+
+    public function resenas()
+    {
+        return $this->hasMany(Resena::class);
+    }
 }
