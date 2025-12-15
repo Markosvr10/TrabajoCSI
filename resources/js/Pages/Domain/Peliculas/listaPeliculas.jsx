@@ -36,7 +36,7 @@ export default function ListaPeliculas({ auth, peliculas, filters }) {
                         <input
                             type="text"
                             className="w-full pl-10 pr-4 py-2 rounded-full border-gray-300 focus:border-violet-500 focus:ring-violet-500 shadow-sm transition"
-                            placeholder="Buscar película, director..."
+                            placeholder="Buscar película"
                             value={busqueda}
                             onChange={(e) => setBusqueda(e.target.value)}
                         />

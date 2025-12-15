@@ -10,7 +10,7 @@ export default function Authenticated({ user, header, children }) {
     const { listaGeneros } = usePage().props || {};
 
     return (
-        <div className="min-h-screen bg-gray-900">
+        <div className="min-h-screen bg-white">
             <nav className="bg-gradient-to-r from-violet-700 via-purple-700 to-indigo-800 shadow-2xl rounded-b-[2rem] border-b-0 relative z-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-20 items-center">
