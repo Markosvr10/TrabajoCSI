@@ -20,9 +20,8 @@ export default function ForgotPassword({ status }) {
             <Head title="Forgot Password" />
 
             <div className="mb-4 text-sm text-gray-600">
-                Forgot your password? No problem. Just let us know your email
-                address and we will email you a password reset link that will
-                allow you to choose a new one.
+                Olvidaste tu contraseña? No hay problema. Solo haznos saber tu email
+                y te enviaremos un correo que te permitira elegir una nueva contraseña.
             </div>
 
             {status && (

@@ -3,7 +3,7 @@ import { Head, Link, router } from '@inertiajs/react';
 import { useState } from 'react';
 
 // Recibimos 'peliculas' (todas) y los filtros actuales
-export default function ListaPeliculas({ auth, peliculas, filters }) {
+export default function ListaPeliculas({ auth, peliculas, filters, generoActual }) {
 
     // Estado para la barra de búsqueda
     const [busqueda, setBusqueda] = useState(filters.search || '');
@@ -17,15 +17,21 @@ export default function ListaPeliculas({ auth, peliculas, filters }) {
 
     return (
         <AuthenticatedLayout user={auth.user}>
-            <Head title="Catálogo de Películas" />
-
+            <Head title={generoActual ? `Películas de ${generoActual.nombre}` : "Catálogo de Películas"} />
             {/* --- CABECERA CON BUSCADOR --- */}
             <div className="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-sm">
                 <div className="max-w-7xl mx-auto py-6 px-4 flex flex-col md:flex-row justify-between items-center gap-4">
 
                     {/* Título y Contador */}
                     <h2 className="text-2xl font-bold text-gray-800 flex items-center">
-                        Catálogo Completo
+                        {generoActual ? (
+                            <>
+                                <span className="text-gray-500 mr-2">Género:</span>
+                                {generoActual.nombre}
+                            </>
+                        ) : (
+                            "Catálogo Completo"
+                        )}
                         <span className="ml-3 text-xs font-bold text-white bg-violet-600 px-3 py-1 rounded-full uppercase tracking-wider">
                             {peliculas.length} Títulos
                         </span>

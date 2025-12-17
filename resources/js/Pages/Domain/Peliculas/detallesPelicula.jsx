@@ -93,9 +93,11 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
 
                             {/* BOTONES */}
                             <div className="flex flex-wrap gap-4">
-                                <button className="px-8 py-3 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-full transition shadow-lg hover:shadow-violet-600/40 transform hover:-translate-y-0.5">
-                                    Ver Trailer
-                                </button>
+                                <a href={pelicula.trailer_url}>
+                                    <button className="px-8 py-3 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-full transition shadow-lg hover:shadow-violet-600/40 transform hover:-translate-y-0.5">
+                                        Ver Trailer
+                                    </button>
+                                </a>
 
                                 {/* Botón Favoritos Dinámico */}
                                 <button

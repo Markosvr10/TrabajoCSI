@@ -14,7 +14,7 @@ class ResenaController extends Controller
         //Validar los datos que vienen del formulario
         $validated = $request->validate([
             'titulo' => 'nullable|string|max:255',
-            'contenido' => 'required|string|min:10', // Mínimo 10 caracteres para que sea una reseña útil
+            'contenido' => 'required|string',
         ]);
 
         $pelicula = Pelicula::findOrFail($peliculaId);

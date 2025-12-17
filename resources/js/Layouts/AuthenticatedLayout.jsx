@@ -73,7 +73,7 @@ export default function Authenticated({ user, header, children }) {
                                                     listaGeneros.map((genero) => (
                                                         <Dropdown.Link
                                                             key={genero.id}
-                                                            href={`/mis-peliculas?genero=${genero.id}`}
+                                                            href={route('peliculas.genero', genero.nom_minus)}
                                                         >
                                                             {genero.nombre}
                                                         </Dropdown.Link>
@@ -168,6 +168,13 @@ export default function Authenticated({ user, header, children }) {
             )}
 
             <main className="relative z-0">{children}</main>
+
+            <footer className="bg-white border-t border-gray-200 py-6 mt-4">
+                <div className="max-w-7xl mx-auto px-4 text-center text-sm text-gray-500">
+                    &copy; {new Date().getFullYear()} ProyectoCSI. Todos los derechos reservados.
+                </div>
+            </footer>
+
         </div>
     );
 }

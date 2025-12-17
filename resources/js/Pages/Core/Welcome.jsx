@@ -23,9 +23,9 @@ export default function Welcome({ auth }) {
                     </h1>
 
                     <p className="mt-6 text-lg text-gray-600 leading-relaxed">
-                        Bienvenido a <strong>Markifilms</strong>. La plataforma informativa donde
-                        el cine cobra vida. Lee <strong>reseñas</strong> honestas, descubre joyas ocultas
-                        y debate con otros fans en nuestros <strong>foros</strong>.
+                        Bienvenido a <strong>Markifilms</strong>. La plataforma informativa sobre peliculas donde
+                        tendras la posibilidad de leer <strong>reseñas</strong> honestas, descubrir joyas ocultas
+                        y debatir con otros fans en nuestros <strong>foros</strong>.
                     </p>
 
                     <div className="mt-8 flex flex-col sm:flex-row gap-4">

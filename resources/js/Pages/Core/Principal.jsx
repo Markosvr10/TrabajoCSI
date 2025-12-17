@@ -48,7 +48,6 @@ export default function Principal({ auth, peliculasFavoritas }) {
                     {/* CABECERA DE SECCIÓN (Título + Botón Ver Todo) */}
                     <div className="flex items-center justify-between mb-6 px-4 sm:px-6 lg:px-8">
                         <h2 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-                            <svg className="w-6 h-6 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                             Tus Favoritos
                         </h2>
                     </div>
@@ -105,9 +104,6 @@ export default function Principal({ auth, peliculasFavoritas }) {
                     ) : (
                         //lista está vacía o falla
                         <div className="mx-4 sm:mx-6 lg:mx-8 bg-white rounded-2xl p-12 text-center border-2 border-dashed border-gray-200 shadow-sm">
-                            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-violet-50 mb-4 text-violet-400">
-                                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                            </div>
                             <h3 className="text-lg font-medium text-gray-900">
                                 {peliculasFavoritas === undefined ? 'Error de conexión' : 'Tu lista está vacía'}
                             </h3>
@@ -121,7 +117,20 @@ export default function Principal({ auth, peliculasFavoritas }) {
                     )}
 
                 </div>
+
+
             </div>
+
+            <div className="py-12 bg-gray-50 min-h-screen">
+                <div className="mx-4 sm:mx-6 lg:mx-8 bg-white rounded-2xl p-12 text-center border-2 border-dashed border-gray-200 shadow-sm">
+                    <h3 className="text-lg font-medium text-gray-900">
+                        Aqui apareceran tus foros favoritos para acceso rapido (PROXIMAMENTE)
+                    </h3>
+                </div>
+            </div>
+
+
+
 
         </AuthenticatedLayout>
     );

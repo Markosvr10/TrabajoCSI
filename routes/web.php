@@ -23,6 +23,10 @@ Route::get('/peliculas', [PeliculaController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('peliculas.index');
 
+Route::get ('/peliculas/{slug}', [PeliculaController::class, 'indexPorGenero'])
+    ->middleware(['auth', 'verified'])
+    ->name('peliculas.genero');
+
 Route::get('/pelicula/{id}', [PeliculaController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('pelicula.show');
