@@ -36,7 +36,6 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             
-            //Se envian a todas las paginas de react los generos
             'listaGeneros' => \App\Models\Genero::all(['id', 'nombre', 'nom_minus']),
 
         ];

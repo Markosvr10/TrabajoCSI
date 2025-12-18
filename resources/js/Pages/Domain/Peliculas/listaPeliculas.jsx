@@ -2,27 +2,21 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, router } from '@inertiajs/react';
 import { useState } from 'react';
 
-// Recibimos 'peliculas' (todas) y los filtros actuales
 export default function ListaPeliculas({ auth, peliculas, filters, generoActual }) {
 
-    // Estado para la barra de búsqueda
     const [busqueda, setBusqueda] = useState(filters.search || '');
 
-    // Función para buscar al pulsar Enter o el botón
     const buscarPeliculas = (e) => {
         e.preventDefault();
-        // Enviamos la petición al backend manteniendo el estado
         router.get('/peliculas', { search: busqueda }, { preserveState: true });
     };
 
     return (
         <AuthenticatedLayout user={auth.user}>
             <Head title={generoActual ? `Películas de ${generoActual.nombre}` : "Catálogo de Películas"} />
-            {/* --- CABECERA CON BUSCADOR --- */}
             <div className="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-sm">
                 <div className="max-w-7xl mx-auto py-6 px-4 flex flex-col md:flex-row justify-between items-center gap-4">
 
-                    {/* Título y Contador */}
                     <h2 className="text-2xl font-bold text-gray-800 flex items-center">
                         {generoActual ? (
                             <>
@@ -37,24 +31,21 @@ export default function ListaPeliculas({ auth, peliculas, filters, generoActual 
                         </span>
                     </h2>
 
-                    {/* Formulario de Búsqueda */}
                     <form onSubmit={buscarPeliculas} className="relative w-full md:w-96">
                         <input
                             type="text"
-                            className="w-full pl-10 pr-4 py-2 rounded-full border-gray-300 focus:border-violet-500 focus:ring-violet-500 shadow-sm transition"
+                            className="w-full pr-4 py-2 rounded-full border-gray-300 focus:border-violet-500 focus:ring-violet-500 shadow-sm transition"
                             placeholder="Buscar película"
                             value={busqueda}
                             onChange={(e) => setBusqueda(e.target.value)}
                         />
-                        {/* Icono de Lupa (Botón) */}
-                        <button type="submit" className="absolute left-3 top-2.5 text-gray-400 hover:text-violet-600 transition">
+                        <button type="submit" className="absolute right-3 top-2.5 text-gray-400 hover:text-violet-600 transition">
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                         </button>
                     </form>
                 </div>
             </div>
 
-            {/* --- REJILLA DE PELÍCULAS --- */}
             <div className="py-12 bg-gray-50 min-h-screen">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -102,7 +93,6 @@ export default function ListaPeliculas({ auth, peliculas, filters, generoActual 
                             ))}
                         </div>
                     ) : (
-                        // Estado Vacío (Sin resultados)
                         <div className="flex flex-col items-center justify-center py-20 text-center">
                             <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-4 text-gray-400">
                                 <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"></path></svg>

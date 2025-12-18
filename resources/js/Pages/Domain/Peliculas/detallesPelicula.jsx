@@ -3,7 +3,6 @@ import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function DetallePelicula({ auth, pelicula, esFavorita }) {
 
-    // --- 1. LÓGICA PARA FAVORITOS ---
     const { post: postFavorito, processing: processingFavorito } = useForm();
 
     const toggleFavorito = () => {
@@ -12,8 +11,6 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
         });
     };
 
-    // --- 2. LÓGICA PARA RESEÑAS (SÓLO TEXTO) ---
-    // Hemos quitado 'puntuacion' del estado inicial
     const { data, setData, post: postResena, processing: processingResena, reset, errors } = useForm({
         titulo: '',
         contenido: '',
@@ -27,7 +24,7 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
         });
     };
 
-    // Helper para pintar las estrellas de la PELÍCULA (Estática)
+    // funcion para la estrella
     const renderEstrellas = (nota) => {
         const valor = nota || 0;
         return [...Array(5)].map((_, index) => (
@@ -39,7 +36,6 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
         <AuthenticatedLayout user={auth.user}>
             <Head title={pelicula.titulo} />
 
-            {/* --- SECCIÓN SUPERIOR: DETALLES --- */}
             <div className="relative bg-gray-900 min-h-[500px] overflow-hidden">
                 <img src={pelicula.imagen_url} className="absolute inset-0 w-full h-full object-cover opacity-20 blur-2xl scale-110" alt="" />
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-50 via-gray-900/60 to-gray-900/90"></div>
@@ -51,7 +47,6 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
                     </Link>
 
                     <div className="flex flex-col md:flex-row gap-10 items-start">
-                        {/* PÓSTER */}
                         <div className="w-full md:w-1/3 lg:w-1/4 flex-shrink-0">
                             <div className="rounded-xl overflow-hidden shadow-2xl border border-white/10 relative group bg-black">
                                 <img src={pelicula.imagen_url} alt={pelicula.titulo} className="w-full h-auto object-cover transform group-hover:scale-105 transition duration-700" />
@@ -61,7 +56,6 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
                             </div>
                         </div>
 
-                        {/* INFO */}
                         <div className="flex-1 text-white">
                             <div className="flex items-center gap-3 text-sm font-semibold tracking-wide uppercase text-violet-300 mb-4">
                                 <span className="bg-violet-500/20 px-3 py-1 rounded-full border border-violet-500/30">
@@ -91,7 +85,7 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
                                 </p>
                             </div>
 
-                            {/* BOTONES */}
+                            {/* Botónes */}
                             <div className="flex flex-wrap gap-4">
                                 <a href={pelicula.trailer_url}>
                                     <button className="px-8 py-3 bg-violet-600 hover:bg-violet-700 text-white font-bold rounded-full transition shadow-lg hover:shadow-violet-600/40 transform hover:-translate-y-0.5">
@@ -99,7 +93,6 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
                                     </button>
                                 </a>
 
-                                {/* Botón Favoritos Dinámico */}
                                 <button
                                     type="button"
                                     onClick={toggleFavorito}
@@ -128,7 +121,7 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
                     <h3 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-3">
                         Comentarios de la comunidad
                         <span className="bg-violet-100 text-violet-700 text-sm font-bold py-1 px-3 rounded-full">
-                            {pelicula.resenas ? pelicula.resenas.length : 0}
+                            {pelicula.resenas.length}
                         </span>
                     </h3>
 
@@ -138,7 +131,6 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
 
                         <form onSubmit={submitResena} className="space-y-6">
 
-                            {/* Título */}
                             <div>
                                 <label htmlFor="titulo" className="block text-sm font-medium text-gray-700 mb-1">Título</label>
                                 <input
@@ -152,7 +144,6 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
                                 {errors.titulo && <div className="text-red-500 text-xs mt-1">{errors.titulo}</div>}
                             </div>
 
-                            {/* Contenido */}
                             <div>
                                 <label htmlFor="contenido" className="block text-sm font-medium text-gray-700 mb-1">Tu opinión</label>
                                 <textarea
@@ -166,14 +157,13 @@ export default function DetallePelicula({ auth, pelicula, esFavorita }) {
                                 {errors.contenido && <div className="text-red-500 text-xs mt-1">{errors.contenido}</div>}
                             </div>
 
-                            {/* Botón */}
                             <div className="flex justify-end">
                                 <button
                                     type="submit"
                                     disabled={processingResena}
                                     className="px-8 py-2.5 bg-violet-600 text-white font-bold rounded-lg hover:bg-violet-700 transition shadow-lg shadow-violet-600/20 disabled:opacity-50 transform hover:-translate-y-0.5"
                                 >
-                                    {processingResena ? 'Publicando...' : 'Publicar Comentario'}
+                                    Publicar Comentario
                                 </button>
                             </div>
                         </form>

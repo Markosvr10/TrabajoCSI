@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('marcos.vicenrios'),
         ]);
 
-        // 2. CREAR GÉNEROS (Guardamos las instancias para usar sus IDs)
         $accion = \App\Models\Genero::create(['nombre' => 'Acción', 'nom_minus' => 'accion']);
         $thriller = \App\Models\Genero::create(['nombre' => 'Thriller', 'nom_minus' => 'thriller']);
         $comedia = \App\Models\Genero::create(['nombre' => 'Comedia', 'nom_minus' => 'comedia']);
@@ -33,16 +32,14 @@ class DatabaseSeeder extends Seeder
         $romance = \App\Models\Genero::create(['nombre' => 'Romance', 'nom_minus' => 'romance']);
         $aventura = \App\Models\Genero::create(['nombre' => 'Aventura', 'nom_minus' => 'aventura']);
 
-        // 3. CREAR PELÍCULAS
 
-        // --- ACCIÓN ---
         \App\Models\Pelicula::create([
             'titulo' => 'Mad Max: Fury Road',
             'descripcion' => 'En un desierto post-apocalíptico, una mujer se rebela contra un gobernante tiránico en busca de su patria con la ayuda de un grupo de prisioneras, una adoradora psicótica y un vagabundo llamado Max.',
             'director' => 'George Miller',
             'ano_lanzamiento' => 2015,
             'valoracion' => 4.8,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Mad+Max',
+            'imagen_url' => 'https://pics.filmaffinity.com/Mad_Max_Furia_en_la_carretera-429261909-large.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=hEJnMQG9ev8',
             'genero_id' => $accion->id,
         ]);
@@ -53,7 +50,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'Chad Stahelski',
             'ano_lanzamiento' => 2014,
             'valoracion' => 4.7,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=John+Wick',
+            'imagen_url' => 'https://pics.filmaffinity.com/John_Wick-166872838-mmed.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=K1i1xYrDFpQ',
             'genero_id' => $accion->id,
         ]);
@@ -64,7 +61,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'Ridley Scott',
             'ano_lanzamiento' => 2000,
             'valoracion' => 4.9,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Gladiator',
+            'imagen_url' => 'https://m.media-amazon.com/images/M/MV5BYWQ4YmNjYjEtOWE1Zi00Y2U4LWI4NTAtMTU0MjkxNWQ1ZmJiXkEyXkFqcGc@._V1_.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=Pb6WME02hdA',
             'genero_id' => $accion->id,
         ]);
@@ -75,19 +72,18 @@ class DatabaseSeeder extends Seeder
             'director' => 'John McTiernan',
             'ano_lanzamiento' => 1988,
             'valoracion' => 4.8,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Die+Hard',
+            'imagen_url' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGHyjv8djlSYc1pSqbAZ4fJAu2N5gSdERh1s--TbmAj6HlnS5I9J6Hb_6rnGse2ylEfXSNYw9amrwGdIVuSGlEUT2MWehHQgR3q66VAw&s=10',
             'trailer_url' => 'https://www.youtube.com/watch?v=TotSHi0ViUc',
             'genero_id' => $accion->id,
         ]);
 
-        // --- THRILLER ---
         \App\Models\Pelicula::create([
             'titulo' => 'Se7en',
             'descripcion' => 'Dos detectives, un novato y un veterano, dan caza a un asesino en serie que utiliza los siete pecados capitales como motivos para sus crímenes.',
             'director' => 'David Fincher',
             'ano_lanzamiento' => 1995,
             'valoracion' => 4.9,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Se7en',
+            'imagen_url' => 'https://upload.wikimedia.org/wikipedia/en/6/68/Seven_%28movie%29_poster.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=ogegN-lGuNo',
             'genero_id' => $thriller->id,
         ]);
@@ -98,7 +94,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'Denis Villeneuve',
             'ano_lanzamiento' => 2013,
             'valoracion' => 4.7,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Prisoners',
+            'imagen_url' => 'https://m.media-amazon.com/images/M/MV5BMTg0NTIzMjQ1NV5BMl5BanBnXkFtZTcwNDc3MzM5OQ@@._V1_FMjpg_UX1000_.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=L88v-QyLk-s',
             'genero_id' => $thriller->id,
         ]);
@@ -109,7 +105,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'David Fincher',
             'ano_lanzamiento' => 2014,
             'valoracion' => 4.6,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Gone+Girl',
+            'imagen_url' => 'https://pics.filmaffinity.com/Perdida-984721130-large.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=LTjI_xT6fyk',
             'genero_id' => $thriller->id,
         ]);
@@ -120,19 +116,18 @@ class DatabaseSeeder extends Seeder
             'director' => 'Martin Scorsese',
             'ano_lanzamiento' => 2010,
             'valoracion' => 4.8,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Shutter+Island',
+            'imagen_url' => 'https://m.media-amazon.com/images/M/MV5BN2FjNWExYzEtY2YzOC00YjNlLTllMTQtNmIwM2Q1YzBhOWM1XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=uMaJJ6TnmW4',
             'genero_id' => $thriller->id,
         ]);
 
-        // --- COMEDIA ---
         \App\Models\Pelicula::create([
             'titulo' => 'Superbad (Supersalidos)',
             'descripcion' => 'Dos estudiantes de secundaria co-dependientes se ven obligados a lidiar con la ansiedad de separación después de que su plan para organizar una fiesta empapada de alcohol sale mal.',
             'director' => 'Greg Mottola',
             'ano_lanzamiento' => 2007,
             'valoracion' => 4.5,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Superbad',
+            'imagen_url' => 'https://m.media-amazon.com/images/M/MV5BNjk0MzdlZGEtNTRkOC00ZDRiLWJkYjAtMzUzYTRiNzk1YTViXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=MNpoTxeydiQ', // Trailer genérico oficial
             'genero_id' => $comedia->id,
         ]);
@@ -143,7 +138,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'Todd Phillips',
             'ano_lanzamiento' => 2009,
             'valoracion' => 4.6,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=The+Hangover',
+            'imagen_url' => 'https://m.media-amazon.com/images/M/MV5BZjIzZDVlZjktNzQwMC00ZDg1LThjMTktZTEzZGI5MDM5YjY5XkEyXkFqcGc@._V1_QL75_UY281_CR9,0,190,281_.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=V6CAMQ5Q1NQ',
             'genero_id' => $comedia->id,
         ]);
@@ -154,7 +149,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'Terry Gilliam & Terry Jones',
             'ano_lanzamiento' => 1975,
             'valoracion' => 4.8,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Monty+Python',
+            'imagen_url' => 'https://www.zonanegativa.com/imagenes/2021/05/10-min-600x900.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=21488auCBqw',
             'genero_id' => $comedia->id,
         ]);
@@ -165,7 +160,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'Wes Anderson',
             'ano_lanzamiento' => 2014,
             'valoracion' => 4.7,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Grand+Budapest',
+            'imagen_url' => 'https://m.media-amazon.com/images/S/pv-target-images/7e72fc7a5206f12315bc56fbfb4798c4e0ceb5e7aa5e0ab163ccda5313b5b71d.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=G1jG8HUY4zI',
             'genero_id' => $comedia->id,
         ]);
@@ -177,7 +172,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'James Wan',
             'ano_lanzamiento' => 2013,
             'valoracion' => 4.6,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=The+Conjuring',
+            'imagen_url' => 'https://m.media-amazon.com/images/M/MV5BM2VmMzRkYzgtMzg2ZC00OTFkLTkwMTYtNTMxNjM2YzI1MjgyXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=_zU1gLWGnpg',
             'genero_id' => $terror->id,
         ]);
@@ -188,7 +183,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'Ari Aster',
             'ano_lanzamiento' => 2018,
             'valoracion' => 4.7,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Hereditary',
+            'imagen_url' => 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d9/Hereditary.png/250px-Hereditary.png',
             'trailer_url' => 'https://www.youtube.com/watch?v=7jMdzpZgqb4',
             'genero_id' => $terror->id,
         ]);
@@ -199,7 +194,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'Andy Muschietti',
             'ano_lanzamiento' => 2017,
             'valoracion' => 4.5,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=It',
+            'imagen_url' => 'https://m.media-amazon.com/images/S/pv-target-images/363deb2f45ed7b9a580d0f681f88faa3c547acbe26fb6aeb43698509a803a14c.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=mZZVFORtMXo',
             'genero_id' => $terror->id,
         ]);
@@ -210,19 +205,18 @@ class DatabaseSeeder extends Seeder
             'director' => 'Stanley Kubrick',
             'ano_lanzamiento' => 1980,
             'valoracion' => 4.9,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=The+Shining',
+            'imagen_url' => 'https://m.media-amazon.com/images/M/MV5BYmUxZDU3NjktMzA1OS00OGUwLWJkOTctYzhjOGI5MTcyY2U3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=Q3lkZ1xfLZ4',
             'genero_id' => $terror->id,
         ]);
 
-        // --- ANIMACIÓN ---
         \App\Models\Pelicula::create([
             'titulo' => 'El viaje de Chihiro',
             'descripcion' => 'Durante la mudanza de su familia, una niña de 10 años deambula por un mundo gobernado por dioses, brujas y espíritus donde los humanos se convierten en bestias.',
             'director' => 'Hayao Miyazaki',
             'ano_lanzamiento' => 2001,
             'valoracion' => 5.0,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Chihiro',
+            'imagen_url' => 'https://m.media-amazon.com/images/M/MV5BM2E2YzcwMTQtNWRlMC00ZGZlLWJhZTEtMDU4ZGIzMWI0NzJmXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=ByXuk9QqQkk',
             'genero_id' => $animacion->id,
         ]);
@@ -233,7 +227,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'Roger Allers & Rob Minkoff',
             'ano_lanzamiento' => 1994,
             'valoracion' => 4.9,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Lion+King',
+            'imagen_url' => 'https://lumiere-a.akamaihd.net/v1/images/image_8b5ca578.jpeg?region=0%2C0%2C540%2C810',
             'trailer_url' => 'https://www.youtube.com/watch?v=8PY1J2USU7k',
             'genero_id' => $animacion->id,
         ]);
@@ -244,7 +238,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'Bob Persichetti et al.',
             'ano_lanzamiento' => 2018,
             'valoracion' => 4.9,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Spider-Verse',
+            'imagen_url' => 'https://www.sonypictures.es/statics/medium_DP_4408323_TC_1400x2100_DP_4408324_Spider_Man_Into_The_Spider_Verse_2018_2000x3000_SP_3a12762a93.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=pDsxJzLlq5U',
             'genero_id' => $animacion->id,
         ]);
@@ -255,19 +249,18 @@ class DatabaseSeeder extends Seeder
             'director' => 'John Lasseter',
             'ano_lanzamiento' => 1995,
             'valoracion' => 4.8,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Toy+Story',
+            'imagen_url' => 'https://m.media-amazon.com/images/M/MV5BZTA3OWVjOWItNjE1NS00NzZiLWE1MjgtZDZhMWI1ZTlkNzYwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=mTkzJWp9ZrY',
             'genero_id' => $animacion->id,
         ]);
 
-        // --- ROMANCE ---
         \App\Models\Pelicula::create([
             'titulo' => 'El diario de Noa (The Notebook)',
             'descripcion' => 'Un anciano le lee a una mujer con demencia la historia de dos jóvenes amantes que fueron separados por las diferencias sociales pero se reencontraron años después.',
             'director' => 'Nick Cassavetes',
             'ano_lanzamiento' => 2004,
             'valoracion' => 4.6,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=The+Notebook',
+            'imagen_url' => 'https://pics.filmaffinity.com/El_diario_de_Noa-565006977-large.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=M3wGV7sKgn4',
             'genero_id' => $romance->id,
         ]);
@@ -278,8 +271,8 @@ class DatabaseSeeder extends Seeder
             'director' => 'Joe Wright',
             'ano_lanzamiento' => 2005,
             'valoracion' => 4.7,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Pride+Prejudice',
-            'trailer_url' => 'https://www.dailymotion.com/video/x9g7iay', // Nota: Usé Dailymotion porque aparecía primero, si prefieres youtube busca "Pride and prejudice 2005 trailer"
+            'imagen_url' => 'https://static.wikia.nocookie.net/doblaje/images/8/87/PridePrejudice.jpg/revision/latest?cb=20250325203427&path-prefix=es',
+            'trailer_url' => 'https://www.dailymotion.com/video/x9g7iay',
             'genero_id' => $romance->id,
         ]);
 
@@ -289,7 +282,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'Damien Chazelle',
             'ano_lanzamiento' => 2016,
             'valoracion' => 4.8,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=La+La+Land',
+            'imagen_url' => 'https://upload.wikimedia.org/wikipedia/en/a/ab/La_La_Land_%28film%29.png',
             'trailer_url' => 'https://www.youtube.com/watch?v=mK46ZapQDcU',
             'genero_id' => $romance->id,
         ]);
@@ -300,19 +293,18 @@ class DatabaseSeeder extends Seeder
             'director' => 'James Cameron',
             'ano_lanzamiento' => 1997,
             'valoracion' => 4.8,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Titanic',
+            'imagen_url' => 'https://m.media-amazon.com/images/I/811lT7khIrL._AC_UF1000,1000_QL80_.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=64IIfxDrhJY',
             'genero_id' => $romance->id,
         ]);
 
-        // --- AVENTURA ---
         \App\Models\Pelicula::create([
             'titulo' => 'El Señor de los Anillos: La Comunidad del Anillo',
             'descripcion' => 'Un humilde Hobbit de la Comarca y ocho compañeros se embarcan en un viaje para destruir el poderoso Anillo Único y salvar la Tierra Media del Señor Oscuro Sauron.',
             'director' => 'Peter Jackson',
             'ano_lanzamiento' => 2001,
             'valoracion' => 5.0,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=LOTR',
+            'imagen_url' => 'https://m.media-amazon.com/images/I/71FHn9dy+NL._AC_UF1000,1000_QL80_.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=mBLFusRHUyc',
             'genero_id' => $aventura->id,
         ]);
@@ -323,7 +315,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'Steven Spielberg',
             'ano_lanzamiento' => 1981,
             'valoracion' => 4.9,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Indiana+Jones',
+            'imagen_url' => 'https://m.media-amazon.com/images/M/MV5BNjEwNjY0ZTAtMjk0MS00MDhkLTkwYWUtMjM3ZmI2M2JhYjJhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=cgWHlD_--fM',
             'genero_id' => $aventura->id,
         ]);
@@ -334,7 +326,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'Alejandro G. Iñárritu',
             'ano_lanzamiento' => 2015,
             'valoracion' => 4.7,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=The+Revenant',
+            'imagen_url' => 'https://m.media-amazon.com/images/M/MV5BOWU3MTI1MjUtYWMyYy00ZjM0LWI0NzMtYTcyZTllOWE0NDE1XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=LoebZZ8K5N0', // Enlace genérico oficial
             'genero_id' => $aventura->id,
         ]);
@@ -345,7 +337,7 @@ class DatabaseSeeder extends Seeder
             'director' => 'Ang Lee',
             'ano_lanzamiento' => 2012,
             'valoracion' => 4.6,
-            'imagen_url' => 'https://via.placehold.co/300x450?text=Life+of+Pi',
+            'imagen_url' => 'https://m.media-amazon.com/images/I/619zlgJpNWL._AC_UF1000,1000_QL80_.jpg',
             'trailer_url' => 'https://www.youtube.com/watch?v=YJGJVeiiYJM',
             'genero_id' => $aventura->id,
         ]);

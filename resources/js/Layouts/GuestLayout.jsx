@@ -1,24 +1,20 @@
 import { Link } from '@inertiajs/react';
 
 export default function Guest({ children }) {
-    // 🧠 Lógica Inteligente:
-    // Comprobamos si la URL actual es '/login'.
     const isLogin = window.location.pathname === '/login';
 
     return (
         <div className="flex min-h-screen bg-white overflow-hidden">
 
-            {/* --- IZQUIERDA: IMAGEN DECORATIVA --- */}
             <div className="hidden lg:block lg:w-1/2 relative bg-gray-900">
                 <img
-                    src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1000&auto=format&fit=crop"
+                    src="https://img.freepik.com/foto-gratis/collaje-fondo-pelicula_23-2149876006.jpg?semt=ais_hybrid&w=740&q=80"
                     alt="Cine Background"
                     className="absolute inset-0 w-full h-full object-cover opacity-80"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-r from-violet-900/90 to-indigo-900/80 mix-blend-multiply"></div>
 
-                {/* CURVA SVG */}
                 <div className="absolute top-0 bottom-0 right-0 w-16 lg:w-24 overflow-hidden pointer-events-none z-20">
                     <svg
                         viewBox="0 0 100 100"
@@ -29,7 +25,6 @@ export default function Guest({ children }) {
                     </svg>
                 </div>
 
-                {/* 👇 TEXTO DINÁMICO AQUÍ */}
                 <div className="absolute bottom-0 left-0 p-16 text-white z-30">
                     <h2 className="text-4xl font-bold tracking-tight">
                         {isLogin ? 'Bienvenido de nuevo.' : 'Bienvenido a MarkiFilms.'}

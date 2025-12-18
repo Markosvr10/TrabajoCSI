@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('generos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->unique(); // Ej: "Terror"
-            $table->string('nom_minus')->unique();   // Ej: "terror" (útil para URLs limpias)
+            $table->string('nombre')->unique();
+            $table->string('nom_minus')->unique();
             $table->timestamps();
         });
     }

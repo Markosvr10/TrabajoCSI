@@ -11,7 +11,6 @@ class ResenaController extends Controller
 {
     public function store(Request $request, $peliculaId)
     {
-        //Validar los datos que vienen del formulario
         $validated = $request->validate([
             'titulo' => 'nullable|string|max:255',
             'contenido' => 'required|string',
@@ -19,8 +18,6 @@ class ResenaController extends Controller
 
         $pelicula = Pelicula::findOrFail($peliculaId);
 
-        //Crear la reseña vinculada al usuario y a la película
-        // Usamos updateOrCreate para evitar duplicados
         Resena::updateOrCreate(
             [
                 'user_id' => Auth::id(),

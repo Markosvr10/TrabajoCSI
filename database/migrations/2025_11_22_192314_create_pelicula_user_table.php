@@ -14,14 +14,10 @@ return new class extends Migration
         Schema::create('pelicula_user', function (Blueprint $table) {
             $table->id();
             
-            // Relación con el Usuario
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             
-            // Relación con la Película
             $table->foreignId('pelicula_id')->constrained()->onDelete('cascade');
             
-            // Opcional: Fecha en que se añadió a favoritos
-            $table->timestamps(); 
         });
     }
 
